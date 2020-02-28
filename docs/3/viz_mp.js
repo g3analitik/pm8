@@ -274,7 +274,7 @@ function vizMP_card(sel, cb)	{
 						    	})
 						    	.html(JSON.stringify([
 						    		d3.event.sourceEvent.type,
-						    		d3.mouse(this),
+						    		//d3.mouse(this),
 							    	[
 							    		d3.event.x,
 							    		d3.event.y,
@@ -330,7 +330,7 @@ function vizMP_card(sel, cb)	{
 						    	})
 						    	.html(JSON.stringify([
 						    		d3.event.sourceEvent.type,
-						    		d3.mouse(this),
+						    		//d3.mouse(this),
 							    	[
 							    		d3.event.x,
 							    		d3.event.y,
