@@ -203,6 +203,9 @@ function vizAlliance(sel, nest, cb)	{
 
 											var container = d3.select('.content-main');
 
+											var box;
+											var ctr;
+
 										  d3.event.on("drag", dragged).on("end", ended);
 
 											//----------------------------------
@@ -210,7 +213,6 @@ function vizAlliance(sel, nest, cb)	{
 											//----------------------------------
 										  function dragged(d) {
 
-												var box;
 												if (d3.event.sourceEvent.type=='touchmove')	{
 											    box = {
 											    	x: d.bb.x + d3.event.x - (d.bb.width/2),
@@ -229,7 +231,7 @@ function vizAlliance(sel, nest, cb)	{
 													;
 
 
-											  var ctr = {
+											 	ctr = {
 											  	x:box.x+(d.bb.width/2),
 											  	y:box.y+(d.bb.height/2),
 											  };
@@ -273,34 +275,33 @@ function vizAlliance(sel, nest, cb)	{
 
 										    div.classed("dragging", false)
 										    			.style('cursor','grab');
+//
+//												var box;
+//												if (d3.event.sourceEvent.type=='touchmove')	{
+//											    box = {
+//											    	x: d.bb.x + d3.event.x - (d.bb.width/2),
+//											    	y: d.bb.y + d3.event.y - (d.bb.height/2),
+//											    };
+//												}else	{
+//											    box = {
+//											    	x: d3.event.sourceEvent.clientX - (d.bb.width/2),
+//											    	y: d3.event.sourceEvent.clientY - (d.bb.height/2),
+//											    };
+//											  }
+//
+//
+//
+//											  var ctr = {
+//											  	x:box.x+(d.bb.width/2),
+//											  	y:box.y+(d.bb.height/2),
+//											  };
 
-												var box;
-												if (d3.event.sourceEvent.type=='touchmove')	{
-											    box = {
-											    	x: d.bb.x + d3.event.x - (d.bb.width/2),
-											    	y: d.bb.y + d3.event.y - (d.bb.height/2),
-											    };
-												}else	{
-											    box = {
-											    	x: d3.event.sourceEvent.clientX - (d.bb.width/2),
-											    	y: d3.event.sourceEvent.clientY - (d.bb.height/2),
-											    };
-											  }
 
 
+												var k = alliances.data().filter(d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height);
 
-											  var ctr = {
-											  	x:box.x+(d.bb.width/2),
-											  	y:box.y+(d.bb.height/2),
-											  };
-
-
-
-												var k = alliances.data().filter(d=>ctr.x > d.bb.x
-													&& ctr.x < d.bb.x+d.bb.width
-													&& ctr.y > d.bb.y
-													&& ctr.y < d.bb.y+d.bb.height
-												);
+										    d3.select('.debugger').style('top',scrollY+'px')
+										    	.html(JSON.stringify(k.length, null, 2));
 
 												var al;
 												if (k) al=k[0];
