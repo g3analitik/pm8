@@ -240,26 +240,6 @@ function vizAlliance(sel, nest, cb)	{
 
 												al = alliances.data().filter(d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height);
 
-										    d3.select('.debugger')
-										    	.styles({
-										    		top:scrollY+'px',
-										    	})
-										    	.html(JSON.stringify([
-										    		d3.event.sourceEvent.type,
-										    		//d3.mouse(this),
-											    	[
-											    		d3.event.x,
-											    		d3.event.y,
-										    		],[
-										    			ctr.x,
-										    			ctr.y
-										    		],
-
-										    		al.length
-
-										    	], null, 2));
-
-
 												alliances.styles({
 														background:d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height
 																				? 'crimson'
@@ -274,51 +254,9 @@ function vizAlliance(sel, nest, cb)	{
 											//----------------------------------
 										  function ended(d) {
 
-										  	dbg&&console.log('ended',d);
 
 										    div.classed("dragging", false)
 										    			.style('cursor','grab');
-//
-//												var box;
-//												if (d3.event.sourceEvent.type=='touchmove')	{
-//											    box = {
-//											    	x: d.bb.x + d3.event.x - (d.bb.width/2),
-//											    	y: d.bb.y + d3.event.y - (d.bb.height/2),
-//											    };
-//												}else	{
-//											    box = {
-//											    	x: d3.event.sourceEvent.clientX - (d.bb.width/2),
-//											    	y: d3.event.sourceEvent.clientY - (d.bb.height/2),
-//											    };
-//											  }
-//
-//
-//
-//											  var ctr = {
-//											  	x:box.x+(d.bb.width/2),
-//											  	y:box.y+(d.bb.height/2),
-//											  };
-
-//
-//
-//												var k = alliances.data().filter(d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height);
-//
-//										    d3.select('.debugger').style('top',scrollY+'px')
-//										    	.html(JSON.stringify(k.length, null, 2));
-//
-//												var al;
-//												if (k) al=k[0];
-//
-//												if (al)	{
-//													try {
-//												    d3.select('.debugger').style('top',scrollY+'px')
-//												    	.html(JSON.stringify(al.key, null, 2));
-//													}catch(e){
-//												    d3.select('.debugger').style('top',scrollY+'px')
-//												    	.html(JSON.stringify(e, null, 2));
-//													};
-//												}
-
 
 												if (al)	{
 													d.values.forEach(d=>{

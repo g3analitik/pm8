@@ -238,6 +238,13 @@ function vizMP_card(sel, cb)	{
 								d.bb = d3.select(this).node().getBoundingClientRect();
 							});
 
+
+							var box;
+							var ctr;
+							var al;
+
+
+
 						  d3.event.on("drag", dragged).on("end", ended);
 
 							//----------------------------------
@@ -245,7 +252,6 @@ function vizMP_card(sel, cb)	{
 							//----------------------------------
 						  function dragged(d) {
 
-								var box;
 								if (d3.event.sourceEvent.type=='touchmove')	{
 							    box = {
 							    	x: d.bb.x + d3.event.x - (d.bb.width/2),
@@ -263,26 +269,12 @@ function vizMP_card(sel, cb)	{
 									.style('top', scrollY + box.y +'px' )
 									;
 
-							  var ctr = {
+							  ctr = {
 							  	x:box.x+(d.bb.width/2),
 							  	y:box.y+(d.bb.height/2),
 							  };
 
-						    d3.select('.debugger')
-						    	.styles({
-						    		top:scrollY+'px',
-						    	})
-						    	.html(JSON.stringify([
-						    		d3.event.sourceEvent.type,
-						    		//d3.mouse(this),
-							    	[
-							    		d3.event.x,
-							    		d3.event.y,
-						    		],[
-						    			ctr.x,
-						    			ctr.y
-						    		]
-						    	], null, 2));
+							  al = alliances.data().filter(d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height);
 
 
 								alliances.styles({
@@ -299,61 +291,13 @@ function vizMP_card(sel, cb)	{
 							//----------------------------------
 						  function ended(d) {
 
-						  	dbg&&console.log('ended',d);
-
 						    div.classed("dragging", false)
 						    			.style('cursor','grab');
 
-								var box;
-								if (d3.event.sourceEvent.type=='touchmove')	{
-							    box = {
-							    	x: d.bb.x + d3.event.x - (d.bb.width/2),
-							    	y: d.bb.y + d3.event.y - (d.bb.height/2),
-							    };
-								}else	{
-							    box = {
-							    	x: d3.event.sourceEvent.clientX - (d.bb.width/2),
-							    	y: d3.event.sourceEvent.clientY - (d.bb.height/2),
-							    };
-							  }
-
-							  var ctr = {
-							  	x:box.x+(d.bb.width/2),
-							  	y:box.y+(d.bb.height/2),
-							  };
-
-
-
-						    d3.select('.debugger')
-						    	.styles({
-						    		top:scrollY+'px',
-						    	})
-						    	.html(JSON.stringify([
-						    		d3.event.sourceEvent.type,
-						    		//d3.mouse(this),
-							    	[
-							    		d3.event.x,
-							    		d3.event.y,
-						    		],[
-						    			ctr.x,
-						    			ctr.y
-						    		]
-						    	], null, 2));
-
-
-								var al = alliances.data().find(d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height);
-								dbg&&console.log('al',al);
-
-						    d3.select('.debugger')
-						    	.styles({
-						    		top:scrollY+'px',
-						    	})
-						    	.html(JSON.stringify(al, null, 2));
-
 								if (al)	{
-									d.feb2020.parti = al.key;
-									d.alliance = al.values[0].alliance;
-									analytic({type:'mp',source:d.parid,target:al.key});
+									d.feb2020.parti = al[0].key;
+									d.alliance = al[0].values[0].alliance;
+									analytic({type:'mp',source:d.parid,target:al[0].key});
 									d3.select('.btn-reset').style('visibility','visible');
 								}
 
