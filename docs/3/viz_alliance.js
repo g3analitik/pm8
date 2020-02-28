@@ -302,13 +302,13 @@ function vizAlliance(sel, nest, cb)	{
 													&& ctr.y < d.bb.y+d.bb.height
 												);
 
-
-										    d3.select('.debugger')
-										    	.styles({
-										    		top:scrollY+'px',
-										    	})
-										    	.html(JSON.stringify(al.key, null, 2));
-
+												try {
+											    d3.select('.debugger').style('top',scrollY+'px')
+											    	.html(JSON.stringify(al.key, null, 2));
+												}catch(e){
+											    d3.select('.debugger').style('top',scrollY+'px')
+											    	.html(JSON.stringify(e, null, 2));
+												};
 
 
 												if (al)	{
