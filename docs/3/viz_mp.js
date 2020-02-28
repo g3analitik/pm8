@@ -244,7 +244,6 @@ function vizMP_card(sel, cb)	{
 							// drag
 							//----------------------------------
 						  function dragged(d) {
-						    //circle.raise().attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
 
 								var box;
 								if (d3.event.sourceEvent.type=='touchmove')	{
@@ -268,6 +267,23 @@ function vizMP_card(sel, cb)	{
 							  	x:box.x+(d.bb.width/2),
 							  	y:box.y+(d.bb.height/2),
 							  };
+
+						    d3.select('.debugger')
+						    	.styles({
+						    		top:scrollY+'px',
+						    	})
+						    	.html(JSON.stringify([
+						    		d3.event.sourceEvent.type,
+						    		d3.mouse(this),
+							    	[
+							    		d3.event.x,
+							    		d3.event.y,
+						    		],[
+						    			ctr.x,
+						    			ctr.y
+						    		]
+						    	], null, 2));
+
 
 								alliances.styles({
 										background:d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height
@@ -305,6 +321,25 @@ function vizMP_card(sel, cb)	{
 							  	x:box.x+(d.bb.width/2),
 							  	y:box.y+(d.bb.height/2),
 							  };
+
+
+
+						    d3.select('.debugger')
+						    	.styles({
+						    		top:scrollY+'px',
+						    	})
+						    	.html(JSON.stringify([
+						    		d3.event.sourceEvent.type,
+						    		d3.mouse(this),
+							    	[
+							    		d3.event.x,
+							    		d3.event.y,
+						    		],[
+						    			ctr.x,
+						    			ctr.y
+						    		]
+						    	], null, 2));
+
 
 								var al = alliances.data().find(d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height);
 								dbg&&console.log('al',al);

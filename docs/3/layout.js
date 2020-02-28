@@ -76,20 +76,20 @@ function layoutBoostrap(sel, cb)	{
 
 				});
 
-//
-//
-//		sel.append('div')
-//			.attr('class','debugger')
-//			.styles({
-//				position:'absolute',
-//				'z-index':99999,
-//				left:0,
-//				top:0,
-//				width:innerWidth+'px',
-//				height:innerHeight+'px',
-//				'pointer-events':'none',
-//			})
-//			.html('DEBUG');
+
+
+		sel.append('div')
+			.attr('class','debugger')
+			.styles({
+				position:'absolute',
+				'z-index':99999,
+				left:0,
+				top:0,
+				width:innerWidth+'px',
+				height:innerHeight+'px',
+				'pointer-events':'none',
+			})
+			.html('DEBUG');
 
 
 	fEnd();
