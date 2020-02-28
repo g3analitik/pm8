@@ -296,11 +296,14 @@ function vizAlliance(sel, nest, cb)	{
 
 
 
-												var al = alliances.data().find(d=>ctr.x > d.bb.x
+												var k = alliances.data().filter(d=>ctr.x > d.bb.x
 													&& ctr.x < d.bb.x+d.bb.width
 													&& ctr.y > d.bb.y
 													&& ctr.y < d.bb.y+d.bb.height
 												);
+
+												var al;
+												if (k) al=k[0];
 
 												try {
 											    d3.select('.debugger').style('top',scrollY+'px')
