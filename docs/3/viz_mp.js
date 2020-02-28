@@ -343,6 +343,13 @@ function vizMP_card(sel, cb)	{
 
 								var al = alliances.data().find(d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height);
 								dbg&&console.log('al',al);
+
+						    d3.select('.debugger')
+						    	.styles({
+						    		top:scrollY+'px',
+						    	})
+						    	.html(JSON.stringify(al, null, 2));
+
 								if (al)	{
 									d.feb2020.parti = al.key;
 									d.alliance = al.values[0].alliance;
