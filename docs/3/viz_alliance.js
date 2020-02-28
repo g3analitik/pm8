@@ -205,6 +205,7 @@ function vizAlliance(sel, nest, cb)	{
 
 											var box;
 											var ctr;
+											var al;
 
 										  d3.event.on("drag", dragged).on("end", ended);
 
@@ -236,6 +237,9 @@ function vizAlliance(sel, nest, cb)	{
 											  	y:box.y+(d.bb.height/2),
 											  };
 
+
+												al = alliances.data().filter(d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height);
+
 										    d3.select('.debugger')
 										    	.styles({
 										    		top:scrollY+'px',
@@ -251,10 +255,9 @@ function vizAlliance(sel, nest, cb)	{
 										    			ctr.y
 										    		],
 
-										    		alliances.data().filter(d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height).length
+										    		al.length
 
 										    	], null, 2));
-
 
 
 												alliances.styles({
@@ -296,32 +299,32 @@ function vizAlliance(sel, nest, cb)	{
 //											  	y:box.y+(d.bb.height/2),
 //											  };
 
-
-
-												var k = alliances.data().filter(d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height);
-
-										    d3.select('.debugger').style('top',scrollY+'px')
-										    	.html(JSON.stringify(k.length, null, 2));
-
-												var al;
-												if (k) al=k[0];
-
-												if (al)	{
-													try {
-												    d3.select('.debugger').style('top',scrollY+'px')
-												    	.html(JSON.stringify(al.key, null, 2));
-													}catch(e){
-												    d3.select('.debugger').style('top',scrollY+'px')
-												    	.html(JSON.stringify(e, null, 2));
-													};
-												}
+//
+//
+//												var k = alliances.data().filter(d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height);
+//
+//										    d3.select('.debugger').style('top',scrollY+'px')
+//										    	.html(JSON.stringify(k.length, null, 2));
+//
+//												var al;
+//												if (k) al=k[0];
+//
+//												if (al)	{
+//													try {
+//												    d3.select('.debugger').style('top',scrollY+'px')
+//												    	.html(JSON.stringify(al.key, null, 2));
+//													}catch(e){
+//												    d3.select('.debugger').style('top',scrollY+'px')
+//												    	.html(JSON.stringify(e, null, 2));
+//													};
+//												}
 
 
 												if (al)	{
 													d.values.forEach(d=>{
-														d.alliance = al.key=='Others' ? '' : al.key;
+														d.alliance = al[0].key=='Others' ? '' : al[0].key;
 													});
-													analytic({type:'alliance',source:d.values[0].feb2020.parti,target:al.key});
+													analytic({type:'alliance',source:d.values[0].feb2020.parti,target:al[0].key});
 													d3.select('.btn-reset').style('visibility','visible');
 												}
 
