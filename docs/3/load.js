@@ -16,7 +16,7 @@ function load(cb)	{
 
 
 	var reqs = [
-		d3.json('_data/mp.json'),
+		d3.json(M.config.data.ref.find(d=>d.key=='mp').url),
 	];
 
 	Promise.all(reqs).then(function(raw){
