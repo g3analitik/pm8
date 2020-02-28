@@ -47,9 +47,9 @@ function layoutBoostrap(sel, cb)	{
 					.html('Who will be the next Prime Minister of Malaysia?');
 
 				sel.append('button')
-					.attr('class','btn btn-primary btn-reset')
+					.attr('class','btn btn-danger btn-reset')
 					.style('visibility','hidden')
-					.style('background','crimson')
+					//.style('background','crimson')
 					.on('click',function(d){
 						d3.select(this).style('visibility','hidden');
 						M.data.par=[];
