@@ -247,7 +247,10 @@ function vizAlliance(sel, nest, cb)	{
 										    		],[
 										    			ctr.x,
 										    			ctr.y
-										    		]
+										    		],
+
+										    		alliances.data().filter(d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height).length
+
 										    	], null, 2));
 
 
@@ -292,9 +295,17 @@ function vizAlliance(sel, nest, cb)	{
 											  };
 
 
-
-
 												var al = alliances.data().find(d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height);
+
+
+										    d3.select('.debugger')
+										    	.styles({
+										    		top:scrollY+'px',
+										    	})
+										    	.html(JSON.stringify(al, null, 2));
+
+
+
 												if (al)	{
 													d.values.forEach(d=>{
 														d.alliance = al.key=='Others' ? '' : al.key;
