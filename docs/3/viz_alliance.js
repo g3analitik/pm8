@@ -295,14 +295,19 @@ function vizAlliance(sel, nest, cb)	{
 											  };
 
 
-												var al = alliances.data().find(d=>ctr.x > d.bb.x && ctr.x < d.bb.x+d.bb.width && ctr.y > d.bb.y && ctr.y < d.bb.y+d.bb.height);
+
+												var al = alliances.data().find(d=>ctr.x > d.bb.x
+													&& ctr.x < d.bb.x+d.bb.width
+													&& ctr.y > d.bb.y
+													&& ctr.y < d.bb.y+d.bb.height
+												);
 
 
 										    d3.select('.debugger')
 										    	.styles({
 										    		top:scrollY+'px',
 										    	})
-										    	.html(JSON.stringify(al, null, 2));
+										    	.html(JSON.stringify(al.key, null, 2));
 
 
 
