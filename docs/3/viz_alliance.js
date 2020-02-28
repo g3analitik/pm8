@@ -305,13 +305,15 @@ function vizAlliance(sel, nest, cb)	{
 												var al;
 												if (k) al=k[0];
 
-												try {
-											    d3.select('.debugger').style('top',scrollY+'px')
-											    	.html(JSON.stringify(al.key, null, 2));
-												}catch(e){
-											    d3.select('.debugger').style('top',scrollY+'px')
-											    	.html(JSON.stringify(e, null, 2));
-												};
+												if (al)	{
+													try {
+												    d3.select('.debugger').style('top',scrollY+'px')
+												    	.html(JSON.stringify(al.key, null, 2));
+													}catch(e){
+												    d3.select('.debugger').style('top',scrollY+'px')
+												    	.html(JSON.stringify(e, null, 2));
+													};
+												}
 
 
 												if (al)	{
