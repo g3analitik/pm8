@@ -19,6 +19,7 @@ function load(cb)	{
 	];
 
 	Promise.all(reqs).then(function(raw){
+
 		M.data.par = raw[0];
 		M.data.default=[];
 		M.data.par.forEach(d=>{
@@ -26,6 +27,8 @@ function load(cb)	{
 			d.alliance = M.config.parti[d.feb2020.parti].alliance;
 			M.data.default.push({...d});
 		});
+
+
 		fEnd();
 	});
 

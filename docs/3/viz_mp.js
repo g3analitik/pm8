@@ -338,50 +338,67 @@ function vizMP_cardPhoto(sel, cb)	{
 	if (dbg){ console.group(f); console.time(f) };
 
 
+	sel.append('table')
+		.styles({
+			'max-width':'100px',
+		})
+		.append('tr')
+			.call(sel=>{
 
-
-
-				sel.append('div')
-					.attr('class','card-photo')
+				sel.append('td')
 					.styles({
-						flex:'0 0 30px',
-						//display:'inline-block',
-//						'background-image': "url('mp6660.png')",
-//						'background-repeat': "no-repeat",
-//						'width':'30px',
-//						'height': '40px',
-//						'background-position':d=>((d.parid-1)*-30)+'px 0px',
+							width:'30px',
+							height:'40px',
+							'background-image': "url('mp6660.png')",
+							'background-repeat': "no-repeat",
+							'width':'29px',
+							'height': '40px',
+							'background-position':d=>((d.parid-1)*-30)+'px 0px',
+							'vertical-align':'top',
+							padding:0,
 					})
-//					.append('img')
-//						.attr('src', d=>'//static.aga.my/profile/'+d.photo)
-//						.styles({
-//							'max-width':'30px',
-//							'max-height':'40px',
-//						});
-
-					.append('svg')
-						.attrs({
-							viewBox:'0 0 30 40',
-						})
+					.append('div')
+						.attr('class','card-photo')
 						.styles({
-							'max-width':'30px',
-							'max-height':'40px',
+							width:'29px',
+							height:'40px',
+							'vertical-align':'top',
+							padding:0,
 						})
-						.call(sel=>{
+						.append('svg')
+							.attrs({
+								viewBox:'0 0 29 40',
+								width:29,
+								height:40,
+							})
+							.styles({
+								'max-width':'29px',
+								'max-height':'40px',
+							})
+							.call(sel=>{
 
 
-							sel
-								.append('image')
-									.attrs({
-										'xlink:href':d=>'//static.analitik.my/profile/'+atob(d.photo),
-										width:30,
-										height:40,
-									});
+								sel
+									.append('rect')
+										.attrs({
+											width:'100%',
+											height:'100%',
+											fill:'none',
+										});
 
-						})
+							})
 
-				sel.append('div')
+				sel.append('td')
 					.attr('class','card-labels')
+					.styles({
+						'font-size':'10px',
+						'font-weight':300,
+						margin:'3px',
+						//'max-height':'100px',
+						//overflow:'hidden',
+						'line-height':'10px',
+						background:'#fff',
+					})
 					.call(sel=>{
 
 							sel.append('div')
@@ -393,6 +410,9 @@ function vizMP_cardPhoto(sel, cb)	{
 								.html(d=>d.nama.toUpperCase());
 
 					});
+
+			});
+
 
 
 	fEnd();
@@ -406,110 +426,23 @@ function vizMP_cardPhoto(sel, cb)	{
 //
 //------------------------------------------------------------------
 function vizMP_cardUpdate(sel, cb)	{
-
-	sel.select('.card-photo')
-		.styles({
-			flex:'0 0 30px',
-		});
-
-	sel.select('.card-labels')
-		.styles({
-			'flex':'1 1 auto',
-			'font-size':'10px',
-			'font-weight':300,
-			margin:'3px',
-			'max-height':'100px',
-			overflow:'hidden',
-			'line-height':'10px',
-			background:'#fff',
-		});
-
-}
-
-//------------------------------------------------------------------
 //
-//------------------------------------------------------------------
-function vizMP_cardPhoto2(sel, cb)	{
-
-	var f = '['+(fc++)+'] '+arguments.callee.toString().replace(/function\s+/,'').split('(')[0],
-	dbg=0, fEnd=function(){ dbg&&console.timeEnd(f); console.groupEnd(f); if (typeof cb=='function') cb() };
-	if (dbg){ console.group(f); console.time(f) };
-
-
-				sel.append('div')
-					.styles({
-						flex:'0 0 30px',
-						//display:'inline-block',
-//						'background-image': "url('mp6660.png')",
-//						'background-repeat': "no-repeat",
-//						'width':'30px',
-//						'height': '40px',
-//						'background-position':d=>((d.parid-1)*-30)+'px 0px',
-					})
-//					.append('img')
-//						.attr('src', d=>'//static.aga.my/profile/'+d.photo)
-//						.styles({
-//							'max-width':'30px',
-//							'max-height':'40px',
-//						});
-
-					.append('svg')
-						.attrs({
-							viewBox:'0 0 30 40',
-						})
-						.styles({
-							'max-width':'30px',
-							'max-height':'40px',
-						})
-						.call(sel=>{
-
-
-
-							sel
-								.append('a')
-									.attrs({
-										href:d=>'//app.aga.my/photos/?ic='+b62.decode(d.qid),
-										target:'_blank',
-									})
-								.append('image')
-									.attrs({
-										'xlink:href':d=>'//static.aga.my/profile/'+d.photo,
-										width:30,
-										height:40,
-									});
-
-						})
-
-				sel.append('div')
-					.styles({
-//						display:'inline-block',
-//						width:'70px',
-
-						'flex':'1 1 auto',
-						'font-size':'10px',
-						'font-weight':300,
-						margin:'3px',
-						'max-height':'100px',
-						overflow:'hidden',
-						'line-height':'10px',
-						background:'#fff',
-					})
-					.call(sel=>{
-
-							sel.append('div')
-								.style('font-weight',400)
-								.html(d=>'P'+d.parid+' '+d.nama_kawasan);
-
-							sel.append('div')
-								.style('font-size','9px')
-								.html(d=>d.nama.toUpperCase());
-
-					});
-
-
-	fEnd();
-
+//	sel.select('.card-photo')
+//		.styles({
+//			flex:'0 0 30px',
+//		});
+//
+//	sel.select('.card-labels')
+//		.styles({
+//			'flex':'1 1 auto',
+//			'font-size':'10px',
+//			'font-weight':300,
+//			margin:'3px',
+//			'max-height':'100px',
+//			overflow:'hidden',
+//			'line-height':'10px',
+//			background:'#fff',
+//		});
 
 }
-
 
