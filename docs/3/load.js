@@ -5,7 +5,7 @@
 function load(cb)	{
 
 	var f = '['+(fc++)+'] '+arguments.callee.toString().replace(/function\s+/,'').split('(')[0],
-	dbg=0, fEnd=function(){ dbg&&console.timeEnd(f); console.groupEnd(f); if (typeof cb=='function') cb() };
+	dbg=1, fEnd=function(){ dbg&&console.timeEnd(f); console.groupEnd(f); if (typeof cb=='function') cb() };
 	if (dbg){ console.group(f); console.time(f) };
 
 	M.ft = Cookies.get('_ft');
@@ -13,7 +13,6 @@ function load(cb)	{
 		M.ft=+moment();
 		Cookies.set('_ft',M.ft);
 	}
-
 
 	var reqs = [
 		d3.json(M.config.data.ref.find(d=>d.key=='mp').url),

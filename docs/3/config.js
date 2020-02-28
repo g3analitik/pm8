@@ -46,7 +46,7 @@ M.config = {
 
 		refdata	: document.location.host.match(/github|analitik/i)
 									? 'https://raw.githubusercontent.com/nyem69/pm8/master/docs/_data'
-									: (typeof _v=='number'?'../':'')+'_data',
+									: '_data',
 
 
 	}
