@@ -151,7 +151,7 @@ function vizMP(sel, nest, cb)	{
 						.merge(p)
 							.call(sel=>{
 
-								var mp = sel.select('.mp-parti-body').selectAll('.mp').data(d=>d.values, d=>d.parid);
+								var mp = sel.select('.mp-parti-body').selectAll('.mp').data(d=>d.values, d=>d.p);
 								mp.exit().remove();
 								mp.enter()
 									.append('div')
@@ -295,7 +295,7 @@ function vizMP_card(sel, cb)	{
 						    			.style('cursor','grab');
 
 								if (al.length)	{
-									analytic({type:'mp', source:d.parid, origin:d.feb2020.parti, target:al[0].key});
+									analytic({type:'mp', source:d.p, origin:d.feb2020.parti, target:al[0].key});
 
 									d.feb2020.parti = al[0].key;
 									d.alliance = al[0].values[0].alliance;
@@ -370,7 +370,7 @@ function vizMP_cardPhoto(sel, cb)	{
 					width:29,
 					height:40,
 					overflow:'hidden',
-					viewBox:d=>[(d.parid-1)*30, 0, 29, 40].join(' '),
+					viewBox:d=>[(d.p-1)*30, 0, 29, 40].join(' '),
 				})
 				.append('image')
 					.attrs({
@@ -385,7 +385,7 @@ function vizMP_cardPhoto(sel, cb)	{
 					.styles({
 
 					})
-					.selectAll('tspan').data(d=>['P'+d.parid, d.parlimen, d.nama])
+					.selectAll('tspan').data(d=>['P'+d.p, d.parlimen, d.nama])
 						.enter()
 							.append('tspan')
 								.attrs({

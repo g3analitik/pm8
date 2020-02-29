@@ -8,11 +8,6 @@ function load(cb)	{
 	dbg=0, fEnd=function(){ dbg&&console.timeEnd(f); console.groupEnd(f); if (typeof cb=='function') cb() };
 	if (dbg){ console.group(f); console.time(f) };
 
-	M.ft = Cookies.get('_ft');
-	if (!M.ft) {
-		M.ft=+moment();
-		Cookies.set('_ft',M.ft);
-	}
 
 	var reqs = [
 		d3.json(M.config.data.ref.find(d=>d.key=='mp').url),
@@ -23,7 +18,7 @@ function load(cb)	{
 		M.data.par = raw[0];
 		M.data.default=[];
 		M.data.par.forEach(d=>{
-			d.parid = +d.parid;
+			d.p = +d.p;
 			d.alliance = M.config.parti[d.feb2020.parti].alliance;
 			M.data.default.push({...d});
 		});
@@ -32,6 +27,7 @@ function load(cb)	{
 		fEnd();
 	});
 
+	getFingerprint();
 
 }
 
@@ -54,3 +50,43 @@ function analytic(res)	{
 	 },200);
 }
 
+
+//------------------------------------------------------------------
+//
+//------------------------------------------------------------------
+function getFingerprint(cb)	{
+
+	M.ft = Cookies.get('_ft');
+	if (M.ft)	{
+		var ft = M.ft.split('-');
+		var ft2 = (+ft[1]||0)+1;
+		M.ft=[ft[0], ft2].join('-');
+		Cookies.set('_ft',M.ft);
+	}else if (window['Fingerprint2'] && typeof window['Fingerprint2']=='function') {
+		if (window.requestIdleCallback) {
+			requestIdleCallback(function () {
+				Fingerprint2.get(getMurmur);
+			});
+		} else {
+			setTimeout(function () {
+				Fingerprint2.get(getMurmur)
+			}, 500);
+		}
+	}else	{
+		M.ft=[+moment(),0].join('-');
+		Cookies.set('_ft',M.ft);
+	}
+
+
+
+
+	//------------------------------------------------------------------
+	//
+	//------------------------------------------------------------------
+	function getMurmur(components)	{
+		var values = components.map(function (component) { return component.value });
+		M.ft = [Fingerprint2.x64hash128(values.join(''), 31), 0].join('-');
+		Cookies.set('_ft',M.ft);
+	}
+
+}
