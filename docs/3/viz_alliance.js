@@ -258,11 +258,14 @@ function vizAlliance(sel, nest, cb)	{
 										    div.classed("dragging", false)
 										    			.style('cursor','grab');
 
-												if (al)	{
+												if (al.length)	{
+
+													analytic({type:'alliance',source:d.values[0].feb2020.parti, origin:d.values[0].alliance, target:al[0].key});
+
 													d.values.forEach(d=>{
 														d.alliance = al[0].key=='Others' ? '' : al[0].key;
 													});
-													analytic({type:'alliance',source:d.values[0].feb2020.parti,target:al[0].key});
+
 													d3.select('.btn-reset').style('visibility','visible');
 												}
 

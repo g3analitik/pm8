@@ -5,7 +5,7 @@
 function load(cb)	{
 
 	var f = '['+(fc++)+'] '+arguments.callee.toString().replace(/function\s+/,'').split('(')[0],
-	dbg=1, fEnd=function(){ dbg&&console.timeEnd(f); console.groupEnd(f); if (typeof cb=='function') cb() };
+	dbg=0, fEnd=function(){ dbg&&console.timeEnd(f); console.groupEnd(f); if (typeof cb=='function') cb() };
 	if (dbg){ console.group(f); console.time(f) };
 
 	M.ft = Cookies.get('_ft');
@@ -39,6 +39,7 @@ function load(cb)	{
 //
 //------------------------------------------------------------------
 function analytic(res)	{
+	//console.log('res',res);
 	if (M.timer.analytic) window.clearTimeout(M.timer.analytic);
 	M.timer.analytic = window.setTimeout(function(){
 		res.device = M.ft;

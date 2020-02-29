@@ -294,10 +294,12 @@ function vizMP_card(sel, cb)	{
 						    div.classed("dragging", false)
 						    			.style('cursor','grab');
 
-								if (al)	{
+								if (al.length)	{
+									analytic({type:'mp', source:d.parid, origin:d.feb2020.parti, target:al[0].key});
+
 									d.feb2020.parti = al[0].key;
 									d.alliance = al[0].values[0].alliance;
-									analytic({type:'mp',source:d.parid,target:al[0].key});
+
 									d3.select('.btn-reset').style('visibility','visible');
 								}
 
@@ -328,6 +330,7 @@ function vizMP_card(sel, cb)	{
 
 
 
+
 //------------------------------------------------------------------
 //
 //------------------------------------------------------------------
@@ -337,82 +340,64 @@ function vizMP_cardPhoto(sel, cb)	{
 	dbg=0, fEnd=function(){ dbg&&console.timeEnd(f); console.groupEnd(f); if (typeof cb=='function') cb() };
 	if (dbg){ console.group(f); console.time(f) };
 
-
-	sel.append('table')
-		.styles({
-			'max-width':'100px',
+	sel.append('svg')
+		.attrs({
+//			viewBox:'0 0 100 40',
+			overflow:'hidden',
+//			width:100,
+//			height:40,
 		})
-		.append('tr')
-			.call(sel=>{
+		.styles({
+			'height':'40px',
+			'width':'100%',
+			'max-width':'170px',
+		})
+		.call(sel=>{
 
-				sel.append('td')
-					.styles({
-							width:'30px',
-							height:'40px',
-							'background-image': "url('mp6660.png')",
-							'background-repeat': "no-repeat",
-							'width':'29px',
-							'height': '40px',
-							'background-position':d=>((d.parid-1)*-30)+'px 0px',
-							'vertical-align':'top',
-							padding:0,
-					})
-					.append('div')
-						.attr('class','card-photo')
-						.styles({
-							width:'29px',
-							height:'40px',
-							'vertical-align':'top',
-							padding:0,
-						})
-						.append('svg')
-							.attrs({
-								viewBox:'0 0 29 40',
-								width:29,
-								height:40,
-							})
-							.styles({
-								'max-width':'29px',
-								'max-height':'40px',
-							})
-							.call(sel=>{
+			sel.append('rect')
+				.attrs({
+					x:0,
+					y:0,
+					width:'100%',
+					height:'100%',
+					fill:'#fff',
+				});
 
-
-								sel
-									.append('rect')
-										.attrs({
-											width:'100%',
-											height:'100%',
-											fill:'none',
-										});
-
-							})
-
-				sel.append('td')
-					.attr('class','card-labels')
-					.styles({
-						'font-size':'10px',
-						'font-weight':300,
-						margin:'3px',
-						//'max-height':'100px',
-						//overflow:'hidden',
-						'line-height':'10px',
-						background:'#fff',
-					})
-					.call(sel=>{
-
-							sel.append('div')
-								.style('font-weight',400)
-								.html(d=>'P'+d.parid+' '+d.parlimen);
-
-							sel.append('div')
-								.style('font-size','9px')
-								.html(d=>d.nama.toUpperCase());
-
+			sel.append('svg')
+				.attrs({
+					x:0,
+					y:0,
+					width:29,
+					height:40,
+					overflow:'hidden',
+					viewBox:d=>[(d.parid-1)*30, 0, 29, 40].join(' '),
+				})
+				.append('image')
+					.attrs({
+						width:6660,
+						height:41,
+						'xlink:href':'mp6660.png',
 					});
 
-			});
+			sel.append('g')
+				.attr('transform','translate(33,4)')
+				.append('text')
+					.styles({
 
+					})
+					.selectAll('tspan').data(d=>['P'+d.parid, d.parlimen, d.nama])
+						.enter()
+							.append('tspan')
+								.attrs({
+									x:0,
+									dy:'1em',
+									fill:(d,i)=>['#666','#333','#000'][i],
+									'font-size':(d,i)=>[12,10,9][i]+'px',
+									'font-weight':(d,i)=>[700,400,300][i],
+								})
+								.text(d=>d);
+
+		});
 
 
 	fEnd();

@@ -57,6 +57,7 @@ function layoutBoostrap(sel, cb)	{
 							M.data.par.push({...d});
 						});
 						vizStatus_nest();
+						analytic({type:'reset'});
 					})
 					.html('Reset');
 
