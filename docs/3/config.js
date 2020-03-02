@@ -39,7 +39,7 @@ M.config = {
 		'SUPP':{ alliance:'GPS', logo:'SUPP.png' },
 		'PSB':{ alliance:'', logo:'PSB.png' },
 		'PRS':{ alliance:'GPS', logo:'PRS.png' },
-		"PDP":{ alliance:'GPS', logo:'PRS.png' },
+		"PDP":{ alliance:'GPS', logo:'PDP.png' },
 	},
 
 	path:{

@@ -205,6 +205,33 @@ function vizMP_card(sel, cb)	{
 				background:'#fff',
 			})
 			.call(vizMP_cardPhoto)
+//			.on('mouseover',function(d){
+//
+//				  var div = d3.select(this)
+//				  						.style('border','1px solid crimson');
+//
+//					d.bb = div.node().getBoundingClientRect();
+//					//dbg&&console.log('d.bb',d.bb);
+//
+//				  div
+//				  	.style('display','block')
+//				  	.style('position','absolute')
+//				  	.style('left',d.bb.left)
+//				  	.style('top',d.bb.top)
+//				  	.style('z-index','999')
+//				  	.style('cursor','move');
+//
+//			})
+//			.on('mouseout', function(d){
+//				  d3.select(this)
+//						//.style('display','inline')
+//						.style('position',null)
+//						.style('left',null)
+//						.style('top',null)
+//						.style('z-index',null)
+//						.style('border','1px solid #ccc');
+//
+//			})
 			.call(
 
 
