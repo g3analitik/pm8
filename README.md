@@ -6,7 +6,7 @@
 
 - Data/photos are mostly scraped from internet
 
-- Served directly on Github Pages at http://nyem69.github.io/pm8/
+- Served directly on Github Pages at https://pm8.analitik.my/
 
 
 
