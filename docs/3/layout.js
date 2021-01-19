@@ -42,6 +42,9 @@ function layoutBoostrap(sel, cb)	{
 				sel.append('h1')
 					.html('Game of Thrones');
 
+				sel.append('h3')
+					.html('Langkah Sheraton, 23 Feb 2020');
+
 				sel.append('p')
 					.attr('class','lead')
 					.html('Who will be the next Prime Minister of Malaysia?');
